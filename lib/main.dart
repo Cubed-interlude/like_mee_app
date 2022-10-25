@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:likemeeapp/match.dart';
+import 'package:likemeeapp/profile.dart';
 
 void main() {
   runApp(const LikeMeeApp());
@@ -10,9 +12,10 @@ class LikeMeeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "LIKEMEE",
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.grey,
       ),
       home: Scaffold(
           backgroundColor: Colors.white,
@@ -52,11 +55,12 @@ class ActionButton extends StatefulWidget {
   @override
   State<ActionButton> createState() => _ActionButtonState();
 }
+
 String imageChange = 'assets/images/people1.jpeg';
 
 class _ActionButtonState extends State<ActionButton> {
   String wordChange = "NO MORE \nLONELY DAYS";
-  
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -81,9 +85,14 @@ class _ActionButtonState extends State<ActionButton> {
             padding: const EdgeInsets.only(bottom: 0.0, top: 80.0),
             child: ElevatedButton(
               onPressed: (() {
-                setState(() {
-                  wordChange = "WELCOME TO \n MY LIFE";
-                });
+                // setState(() {
+                //   wordChange = "WELCOME TO \n MY LIFE";
+                // });
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MatchScreen(),
+                    ));
               }),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -96,17 +105,23 @@ class _ActionButtonState extends State<ActionButton> {
                     fontSize: 16,
                     fontStyle: FontStyle.normal),
               ),
-              child: const Text('get started'),
+              child: const Text('get started',
+              style: TextStyle(
+                color: Colors.white,
+              )),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 0.0, top: 0.0),
             child: ElevatedButton(
               onPressed: (() {
-                setState(() {
-                  wordChange = "MEET NEW \n PEOPLE";
-                  imageChange = 'assets/images/people1.jpeg';
-                });}),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen(),));
+
+                // setState(() {
+                //   wordChange = "MEET NEW \n PEOPLE";
+                //   imageChange = 'assets/images/people1.jpeg';
+                // });
+              }),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 elevation: 0,
